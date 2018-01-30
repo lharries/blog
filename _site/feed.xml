@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2018-01-30T00:11:36+00:00</updated><id>/blog/</id><title type="html">Luke Harries</title><subtitle>Currently, MSc Computer Science at UCL. Previously, Cambridge Medicine. Always a Geek striving to make the world a better place. </subtitle><entry><title type="html">Improving the internet for the visually impaired!</title><link href="/blog/hackathon/healthtech/2018/01/25/ai-screenreader.html" rel="alternate" type="text/html" title="Improving the internet for the visually impaired!" /><published>2018-01-25T17:49:12+00:00</published><updated>2018-01-25T17:49:12+00:00</updated><id>/blog/hackathon/healthtech/2018/01/25/ai-screenreader</id><content type="html" xml:base="/blog/hackathon/healthtech/2018/01/25/ai-screenreader.html">&lt;p&gt;&lt;em&gt;Originally written as a guest post for &lt;a href=&quot;https://microsoft.com/&quot;&gt;Microsoft&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;HackCambridge provided the perfect opportunity to return to Cambridge University. It is where I completed my undergraduate degree in Medicine and Cognitive Neuroscience, before moving to UCL to study a masters in Computer Science. Our team included &lt;a href=&quot;https://www.linkedin.com/in/filipkozera/&quot;&gt;Filip&lt;/a&gt;, a masters student in information engineering at Cambridge, where he is using deep learning on EMG signals to control prosthetics; &lt;a href=&quot;https://www.linkedin.com/in/marcin-kolaszewski-07912314a/&quot;&gt;Marcin&lt;/a&gt;, a joint honors Mathematics and Computer Science student from Brown University; and &lt;a href=&quot;https://www.linkedin.com/in/mateusz-jakub-staniszewski-19946590/&quot;&gt;Mateusz&lt;/a&gt;, a recent Mathematics graduate from Imperial and a current Software Engineer at BlackRock.&lt;/p&gt;
+
+&lt;p&gt;With flights from Poland to London for two of the team members booked, we starting discussing ideas for what would be our first Hackathon together. Our ideas ranged from trying to implement a decentralised ICO (&lt;a href=&quot;https://ethresear.ch/t/explanation-of-daicos/465&quot;&gt;DAICO&lt;/a&gt;) to controlling a VR world with a &lt;a href=&quot;https://www.myo.com/&quot;&gt;Myo armband&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As the event neared, Microsoft released a video of their &lt;a href=&quot;https://www.youtube.com/watch?v=R2mC-NUAmMk&quot;&gt;Seeing AI app&lt;/a&gt; to announce their involvement as a keen sponsor. The video demonstrated how Saqid Shaikh, a visually impaired software developer at Microsoft, used the app he created, to convert a visual world into an audible experience. &lt;strong&gt;It was incredible&lt;/strong&gt;. The app could describe kids playing Frisbee in the park, or allow him to read a menu. We could only imagine the impact it had on him and many others with visual impairments.&lt;/p&gt;
+
+&lt;p&gt;We knew we wanted to build on SeeingAI’s fantastic work. We initially discussed building an Android app equivalent, possibly in conjunction with the Myo Armband for hands-free control. However, with five minutes to go before the hackathon started and much excitement, it dawned on us how much of the internet was still inaccessible to the visually impaired in this day and age. We were committed to solving a problem which affects 32 million people worldwide in the hope of having a true social impact&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
+
+&lt;p&gt;People with visual impairments frequently rely on a Screen Reader to navigate the internet. The Screen Reader reads out the written content of each page. However, when the Screen Reader reaches an image it has to rely on the “alt tag” to provide a caption. For the majority of the internet these “alt tags” are either missing (think of any user-uploaded content such as Twitter or LinkedIn), superficial or inaccurate.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;This affects millions of people every day.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/HackCambridgeScreenReader/Blog/raw/master/job.png&quot; alt=&quot;Example of job post which is save as an image and therefore not accessible&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The Screen Reader would not pickup any details of this “Hot Job”&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
+
+&lt;p&gt;Once we had narrowed down the problem, coming up with the solution was much easier. We decided we would bring Facebook’s automatic “alt tag” generation to every page on the internet (right click on your profile picture, click inspect element and see what Facebook’s sees!).&lt;/p&gt;
+
+&lt;p&gt;By using a Chrome extension we could scan through every element on the page looking for images lacking an “alt tag”. For each image where the “alt tag” was missing, we would send the image URL to an Azure cloud function. The cloud function would check if we already had the “alt tag” saved and if so return it. If not we would use the Microsoft’s Cognitive Services Vision API to perform object recognition and generate the description to be added as the “alt tag”.&lt;/p&gt;
+
+&lt;p&gt;We split into pairs: Mateusz and I built the Chrome extension, and Filip and Marcin built the cloud function and connected it to the Cognitive Services API. We started programming at 2 pm and by 9 pm we already had a fully functional prototype. The speed, accuracy and ease of integration with which the image descriptions were being generated would not have been possible just a few years ago. The extra time allowed us to link in three more APIs: facial recognition, emotion recognition and OCR (image to text), depending on what was in the image. This provided much more descriptive image captions.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The speed, accuracy and ease of integration with which the image descriptions were being generated would not have been possible just a few years ago.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/HackCambridgeScreenReader/Blog/raw/master/example.png&quot; alt=&quot;example of a generated description&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=_JQYoQBfBpI&quot;&gt;Watch a demo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
+
+&lt;p&gt;We are really proud of what we have built so far and cannot wait to release it to the public. We hope our Chrome extension will empower those with visual impairments to browse the web, without having to rely on others to create the “alt tags”.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/HackCambridgeScreenReader/Blog/raw/master/team.jpg&quot; alt=&quot;Team Picture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;:boom: Thanks very much to &lt;a href=&quot;https://microsoft.com/&quot;&gt;Microsoft&lt;/a&gt; for the Cognitive Services prize!&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Originally written as a guest post for Microsoft</summary></entry><entry><title type="html">About Me</title><link href="/blog/luke/harries/2018/01/20/about-me.html" rel="alternate" type="text/html" title="About Me" /><published>2018-01-20T17:49:12+00:00</published><updated>2018-01-20T17:49:12+00:00</updated><id>/blog/luke/harries/2018/01/20/about-me</id><content type="html" xml:base="/blog/luke/harries/2018/01/20/about-me.html">&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/blog/assets/imgs/headshot.png&quot; alt=&quot;A picture of me&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I’m a Masters student in Computer Science at &lt;a href=&quot;http://www.ucl.ac.uk/&quot;&gt;UCL&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I write code in Javascript, Java, and Python.&lt;/p&gt;
+
+&lt;p&gt;Some of the things I’ve built include a &lt;a href=&quot;/blog/hackathon/healthtech/2018/01/25/ai-screenreader.html&quot;&gt;tool to help the visually impaired use the internet&lt;/a&gt;, and a &lt;a href=&quot;https://danielquinn.org/blog/the-sudoimmerse-hackathon/&quot;&gt;faster, cheaper and a more accurate test for macular degeneration&lt;/a&gt;. You can find more of my projects &lt;a href=&quot;/blog/projects&quot;&gt;here&lt;/a&gt; and the code on &lt;a href=&quot;https://github.com/lharries&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I previously co-founded &lt;a href=&quot;http://proteam.io/&quot;&gt;Proteam&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Prior to that, I studied Medicine at &lt;a href=&quot;https://www.cam.ac.uk/&quot;&gt;Cambridge&lt;/a&gt;. Where I was President of the &lt;a href=&quot;https://www.cusus.org/&quot;&gt;Cambridge StartUp Society&lt;/a&gt; which had some pretty cool speakers, including &lt;a href=&quot;http://tomblomfield.com/&quot;&gt;startup founders&lt;/a&gt; and &lt;a href=&quot;https://forwardpartners.com/&quot;&gt;venture capitalists&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s my &lt;a href=&quot;/blog/assets/Luke-Harries-cv.pdf&quot;&gt;CV&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’m always keen to here about new projects or grab coffee, contact me at luke.harries@me.com&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry></feed>
